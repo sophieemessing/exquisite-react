@@ -7,14 +7,13 @@ const PlayerSubmissionForm = (props) => {
   
   const [formFields, setFormFields] = useState(props.fields)
 
-  // const resetFields = () => {
-  //   // console.log('hello', props.fields)
-  //   setFormFields(props.fields)
-  // }
+  const resetFields = () => {
+    setFormFields(props.fields)
+  }
 
   const onFieldChange = (i, event) => {
     const newFormData = _.cloneDeep(formFields) // make a deep copy
-    newFormData[i]['userInput'] = event.target.value
+    newFormData[i] = {...newFormData[i], userInput: event.target.value};
     setFormFields(newFormData)
   }
 
@@ -25,7 +24,7 @@ const PlayerSubmissionForm = (props) => {
           key={i}
           name={field.key}
           placeholder={field.placeholder}
-          value={formFields.key}
+          value={field.userInput}
           onChange={(event)=>{onFieldChange(i, event)}}        
           type="text" 
         />
@@ -38,8 +37,7 @@ const PlayerSubmissionForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault()
     props.sendSubmission(formFields)
-    console.log('hello', props.fields)
-    setFormFields(props.fields)
+    resetFields()
   }
 
   return (
