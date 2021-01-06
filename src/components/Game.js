@@ -13,6 +13,14 @@ const Game = () => {
     }
   }).join(' ');
 
+  const [submissions, setSubmissions] = useState([])
+
+  const sendSubmission = (lineOfPoem) => {
+     setSubmissions([...submissions, lineOfPoem])
+  }
+
+
+
   return (
     <div className="Game">
       <h2>Game</h2>
@@ -27,7 +35,7 @@ const Game = () => {
 
       <RecentSubmission />
 
-      <PlayerSubmissionForm />
+      <PlayerSubmissionForm index={submissions.length+1} fields={FIELDS} sendSubmission={sendSubmission}/>
 
       <FinalPoem />
 
@@ -40,28 +48,28 @@ const FIELDS = [
   'The',
   {
     key: 'adj1',
-    placeholder: 'adjective',
+    placeholder: 'adjective1',
   },
   {
     key: 'noun1',
-    placeholder: 'noun',
+    placeholder: 'noun1',
   },
   {
-    key: 'adv',
-    placeholder: 'adverb',
+    key: 'adverb1',
+    placeholder: 'adverb1',
   },
   {
-    key: 'verb',
-    placeholder: 'verb',
+    key: 'verb1',
+    placeholder: 'verb1',
   },
   'the',
   {
     key: 'adj2',
-    placeholder: 'adjective',
+    placeholder: 'adjective2',
   },
   {
     key: 'noun2',
-    placeholder: 'noun',
+    placeholder: 'noun2',
   },
   '.',
 ];

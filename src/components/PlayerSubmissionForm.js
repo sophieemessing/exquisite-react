@@ -1,28 +1,61 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import './PlayerSubmissionForm.css';
+import _ from 'lodash';
 
-const PlayerSubmissionForm = () => {
+const PlayerSubmissionForm = (props) => {
+  
+  const [formFields, setFormFields] = useState(props.fields)
+
+  // const resetFields = () => {
+  //   // console.log('hello', props.fields)
+  //   setFormFields(props.fields)
+  // }
+
+  const onFieldChange = (i, event) => {
+    const newFormData = _.cloneDeep(formFields) // make a deep copy
+    newFormData[i]['userInput'] = event.target.value
+    setFormFields(newFormData)
+  }
+
+  const generateFormFields = formFields.map((field, i) => {
+    if(field.key) {
+      return(
+        <input
+          key={i}
+          name={field.key}
+          placeholder={field.placeholder}
+          value={formFields.key}
+          onChange={(event)=>{onFieldChange(i, event)}}        
+          type="text" 
+        />
+      )
+    } else {
+      return (field)
+    }
+  })
+
+  const submitHandler = (event) => {
+    event.preventDefault()
+    props.sendSubmission(formFields)
+    console.log('hello', props.fields)
+    setFormFields(props.fields)
+  }
+
   return (
     <div className="PlayerSubmissionForm">
-      <h3>Player Submission Form for Player #{  }</h3>
+      <h3>Player Submission Form for Player #{ props.index }</h3>
 
-      <form className="PlayerSubmissionForm__form" >
+      <form className="PlayerSubmissionForm__form" onSubmit={submitHandler}>
 
         <div className="PlayerSubmissionForm__poem-inputs">
 
-          {
-            // Put your form inputs here... We've put in one below as an example
-          }
-          <input
-            placeholder="hm..."
-            type="text" />
+          {generateFormFields}
 
         </div>
 
         <div className="PlayerSubmissionForm__submit">
-          <input type="submit" value="Submit Line" className="PlayerSubmissionForm__submit-btn" />
+          <input type="submit" value="Submit Line" className="PlayerSubmissionForm__submit-btn"/>
         </div>
       </form>
     </div>
