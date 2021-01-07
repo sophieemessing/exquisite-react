@@ -2,20 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './FinalPoem.css';
 
+
 const FinalPoem = (props) => {
 
-  return (
-    <div className="FinalPoem">
-      <section className="FinalPoem__poem">
-        <h3>Final Poem</h3>
+  const clickHandler = () => {
+    props.revealPoem()
+  }
 
-      </section>
-
-      <div className="FinalPoem__reveal-btn-container">
-        <input type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" />
+  if (props.isSubmitted === true) {
+    return (
+      <div className="FinalPoem">
+        <section className="FinalPoem__poem">
+          <h3>Final Poem</h3>
+          <ol>
+            {props.submissions.map(submission => (
+              <li key={submission}>{submission}</li>
+            ))}
+          </ol>
+        </section>
       </div>
-    </div>
-  );
+    )
+  } else {
+    return(
+      <div className="FinalPoem__reveal-btn-container">
+        <input type="button" 
+        value="We are finished: Reveal the Poem" 
+        className="FinalPoem__reveal-btn" 
+        onClick={clickHandler}/>
+      </div>
+    )
+  };
 }
 
 FinalPoem.propTypes = {

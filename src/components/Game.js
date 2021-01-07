@@ -13,10 +13,28 @@ const Game = () => {
     }
   }).join(' ');
 
+
+  // Wave 1 - Handle Submissions
   const [submissions, setSubmissions] = useState([])
 
-  const sendSubmission = (lineOfPoem) => {
-     setSubmissions([...submissions, lineOfPoem])
+  const [isSubmitted, setSubmittedStatus] = useState(false)
+  
+  const sendSubmission = (formFields) => {
+
+    const submission = formFields.map(field => {
+      if (field.key) {
+        return field.userInput;
+      } else {
+        return field;
+      }
+    }).join(' ');
+
+    setSubmissions([...submissions, submission])
+  }
+  
+  // Wave 2 - Final Poem
+  const revealPoem = () => {    
+    setSubmittedStatus(true)
   }
 
 
@@ -37,7 +55,7 @@ const Game = () => {
 
       <PlayerSubmissionForm index={submissions.length+1} fields={FIELDS} sendSubmission={sendSubmission}/>
 
-      <FinalPoem />
+      <FinalPoem isSubmitted={isSubmitted} submissions={submissions} revealPoem={revealPoem} />
 
     </div>
   );
