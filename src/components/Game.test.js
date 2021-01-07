@@ -9,35 +9,35 @@ const FIELDS = [
   'The',
   {
     key: 'adj1',
-    placeholder: 'adjective',
+    placeholder: 'adjective1',
   },
   {
     key: 'noun1',
-    placeholder: 'noun',
+    placeholder: 'noun1',
   },
   {
-    key: 'adv',
-    placeholder: 'adverb',
+    key: 'adverb1',
+    placeholder: 'adverb1',
   },
   {
-    key: 'verb',
-    placeholder: 'verb',
+    key: 'verb1',
+    placeholder: 'verb1',
   },
   'the',
   {
     key: 'adj2',
-    placeholder: 'adjective',
+    placeholder: 'adjective2',
   },
   {
     key: 'noun2',
-    placeholder: 'noun',
+    placeholder: 'noun2',
   },
   '.',
 ];
 
 const INPUT_FIELDS = FIELDS.filter((element) => typeof element !== 'string');
 
-describe.skip('Game', () => {
+describe('Game', () => {
 
   describe('Wave 1:  Rendering Game', () => {
 
@@ -165,6 +165,7 @@ describe.skip('Game', () => {
       });
 
       test('Adding 2 lines to the poem and then revealing it', () => {
+
         const line1 = ['big', 'cat', 'abruptly', 'eats', 'tasty', 'dogfood'];
         const line2 = ['small', 'pooch', 'slowly', 'whines', 'annoying', 'pest'];
       

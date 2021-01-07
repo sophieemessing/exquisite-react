@@ -5,10 +5,18 @@ import _ from 'lodash';
 
 const PlayerSubmissionForm = (props) => {
   
-  const [formFields, setFormFields] = useState(props.fields)
+  const newFields = props.fields.map((field) => {
+    if (field.key) {
+      return {...field, userInput: ''}
+    } else {
+      return field
+    }
+  })
+
+  const [formFields, setFormFields] = useState(newFields)
 
   const resetFields = () => {
-    setFormFields(props.fields)
+    setFormFields(newFields)
   }
 
   const onFieldChange = (i, event) => {

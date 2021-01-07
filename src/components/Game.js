@@ -36,7 +36,9 @@ const Game = () => {
   const revealPoem = () => {    
     setSubmittedStatus(true)
   }
+  
 
+  if (!isSubmitted) {
   return (
     <div className="Game">
       <h2>Game</h2>
@@ -49,14 +51,19 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission submission={submissions[submissions.length - 1]}/>
+      <RecentSubmission submission={submissions[submissions.length - 1] || ''}/>
 
       <PlayerSubmissionForm index={submissions.length+1} fields={FIELDS} sendSubmission={sendSubmission}/>
 
-      <FinalPoem isSubmitted={isSubmitted} submissions={submissions} revealPoem={revealPoem} />
+      <FinalPoem isSubmitted={isSubmitted} submissions={submissions} revealPoem={revealPoem} />  
 
     </div>
   );
+  } else {
+    return (
+      <FinalPoem isSubmitted={isSubmitted} submissions={submissions} revealPoem={revealPoem} />  
+    )
+  }
 }
 
 
@@ -65,33 +72,27 @@ const FIELDS = [
   {
     key: 'adj1',
     placeholder: 'adjective1',
-    userInput: ''
   },
   {
     key: 'noun1',
     placeholder: 'noun1',
-    userInput: ''
   },
   {
     key: 'adverb1',
     placeholder: 'adverb1',
-    userInput: ''
   },
   {
     key: 'verb1',
     placeholder: 'verb1',
-    userInput: ''
   },
   'the',
   {
     key: 'adj2',
     placeholder: 'adjective2',
-    userInput: ''
   },
   {
     key: 'noun2',
     placeholder: 'noun2',
-    userInput: ''
   },
   '.',
 ];
