@@ -37,8 +37,6 @@ const Game = () => {
     setSubmittedStatus(true)
   }
 
-
-
   return (
     <div className="Game">
       <h2>Game</h2>
@@ -51,7 +49,7 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission />
+      <RecentSubmission submission={submissions[submissions.length - 1]}/>
 
       <PlayerSubmissionForm index={submissions.length+1} fields={FIELDS} sendSubmission={sendSubmission}/>
 
